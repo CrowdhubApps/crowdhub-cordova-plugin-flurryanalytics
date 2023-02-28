@@ -3,17 +3,12 @@
     id="crowdhub-cordova-plugin-flurryanalytics"
     version="1.5.0">
     <name>Flurry Analytics</name>
-    <description>Adds support for Flurry Analytics to your Cordova/Capacitor apps. Thanks to Carlos "blakgeek" Lawton for the original plugin from which this is derived.</description>
+    <description>Adds support for Flurry Analytics to your Cordova. Thanks to Carlos "blakgeek" Lawton for the original plugin from which this is derived.</description>
     <license>Apache 2.0</license>
     <keywords>flurry,analytics,cordova</keywords>
     <author>Austin Isakson</author>
-
-    <engines>
-        <engine name="cordova" version=">=5.0.0"/>
-    </engines>
-
-    <js-module src="www/FlurryAnalyticsPlugin.js" name="FlurryAnalyticsPlugin">
-        <clobbers target="FlurryAnalyticsPlugin"/>
+    <js-module src="www/FlurryAnalyticsPlugin.js" name="FlurryAnalytics">
+        <clobbers target="FlurryAnalytics"/>
     </js-module>
 
     <platform name="ios">
@@ -26,7 +21,7 @@
         <source-file src="src/ios/FlurryAnalyticsPlugin.m"/>
         <podspec>
             <pods use-frameworks="true">
-                <pod name="Flurry-iOS-SDK/FlurrySDK" modular_headers="true"/>
+                <pod name="Flurry-iOS-SDK/FlurrySDK" modular_headers="true" podspec="https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/0/0/8/Flurry-iOS-SDK/10.3.1/Flurry-iOS-SDK.podspec.json"/>
             </pods>
         </podspec>
     </platform>
