@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"
+    id="crowdhub-plugin-flurryanalytics"
+    version="1.5.0">
+    <name>Flurry Analytics</name>
+    <description>Adds support for Flurry Analytics to your Cordova/Capacitor apps. Thanks to Carlos "blakgeek" Lawton for the original plugin from which this is derived.</description>
+    <license>Apache 2.0</license>
+    <keywords>flurry,analytics,cordova</keywords>
+    <author>Austin Isakson</author>
+
+    <engines>
+        <engine name="cordova" version=">=5.0.0"/>
+    </engines>
+
+    <js-module src="www/FlurryAnalyticsPlugin.js" name="FlurryAnalyticsPlugin">
+        <clobbers target="FlurryAnalyticsPlugin"/>
+    </js-module>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="FlurryAnalyticsPlugin">
+                <param name="ios-package" value="FlurryAnalyticsPlugin"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/FlurryAnalyticsPlugin.h"/>
+        <source-file src="src/ios/FlurryAnalyticsPlugin.m"/>
+        <podspec>
+            <pods use-frameworks="true">
+                <pod name="Flurry-iOS-SDK/FlurrySDK" modular_headers="true"/>
+            </pods>
+        </podspec>
+    </platform>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="FlurryAnalyticsPlugin">
+                <param name="android-package" value="com.blakgeek.cordova.plugin.flurry.FlurryAnalyticsPlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"/>
+        </config-file>
+
+        <source-file src="src/android/com/blakgeek/cordova/plugin/flurry/FlurryAnalyticsPlugin.java" target-dir="src/com/blakgeek/cordova/plugin/flurry/"/>
+
+        <framework src="com.flurry.android:analytics:13+"/>
+        <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
+    </platform>
+</plugin>
