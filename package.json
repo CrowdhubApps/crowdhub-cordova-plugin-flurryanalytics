@@ -1,5 +1,5 @@
 {
-	"name": "crowdhub-plugin-flurryanalytics",
+	"name": "crowdhub-cordova-plugin-flurryanalytics",
 	"version": "1.5.0",
 	"description": "Adds support for Flurry Analytics to Cordova and Capacitor apps, the successor to https://github.com/blakgeek/cordova-plugin-flurryanalytics",
 	"repository": {
@@ -15,7 +15,7 @@
 		"flurry"
 	],
 	"cordova": {
-		"id": "crowdhub-plugin-flurryanalytics",
+		"id": "crowdhub-cordova-plugin-flurryanalytics",
 		"platforms": [
 			"android",
 			"ios"
