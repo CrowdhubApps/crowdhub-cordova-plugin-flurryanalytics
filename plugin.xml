@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"
     id="crowdhub-cordova-plugin-flurryanalytics"
     version="1.5.0">
-    <name>Flurry Analytics</name>
+    <name>FlurryAnalytics</name>
     <description>Adds support for Flurry Analytics to your Cordova. Thanks to Carlos "blakgeek" Lawton for the original plugin from which this is derived.</description>
     <license>Apache 2.0</license>
     <keywords>flurry,analytics,cordova</keywords>
@@ -13,33 +13,30 @@
 
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="FlurryAnalyticsPlugin">
-                <param name="ios-package" value="FlurryAnalyticsPlugin"/>
+            <feature name="FlurryAnalytics">
+                <param name="ios-package" value="FlurryAnalytics"/>
             </feature>
         </config-file>
-        <header-file src="src/ios/FlurryAnalyticsPlugin.h"/>
-        <source-file src="src/ios/FlurryAnalyticsPlugin.m"/>
+        <source-file src="src/ios/FlurryAnalyticsPlugin.swift"/>
         <podspec>
             <pods use-frameworks="true">
-                <pod name="Flurry-iOS-SDK/FlurrySDK" modular_headers="true" podspec="https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/0/0/8/Flurry-iOS-SDK/10.3.1/Flurry-iOS-SDK.podspec.json"/>
+                <pod name="Flurry-iOS-SDK/FlurrySDK" modular_headers="true" />
             </pods>
         </podspec>
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
 
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="FlurryAnalyticsPlugin">
-                <param name="android-package" value="com.blakgeek.cordova.plugin.flurry.FlurryAnalyticsPlugin"/>
+            <feature name="FlurryAnalytics">
+                <param name="android-package" value="com.crowdhubapps.cordova.plugins.FlurryAnalytics"/>
             </feature>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.INTERNET"/>
         </config-file>
-
-        <source-file src="src/android/com/blakgeek/cordova/plugin/flurry/FlurryAnalyticsPlugin.java" target-dir="src/com/blakgeek/cordova/plugin/flurry/"/>
-
-        <framework src="com.flurry.android:analytics:13+"/>
-        <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
+        <source-file src="src/android/com/crowdhubapps/cordova/plugin/flurryanalytics/FlurryAnalyticsPlugin.kt" target-dir="java/com/crowdhubapps/cordova.plugins/"/>
+        <framework src="com.flurry.android:analytics:14+"/>
     </platform>
 </plugin>

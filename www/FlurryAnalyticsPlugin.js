@@ -1,170 +1,495 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 var exec = require('cordova/exec');
 
-function FlurryAnalytics(config) {
-
-	if (config) {
-		exec(null, null, 'FlurryAnalyticsPlugin', 'initialize', [config.appKey, config]);
+function FlurryAnalytics() {
+	this.initialize = function (
+		apiKey,
+		logLevel,
+		crashReportingEnabled,
+		appVersion,
+		iapReportingEnabled,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'initialize', [apiKey, logLevel, crashReportingEnabled, appVersion, iapReportingEnabled]);
 	}
-	/*
-	 deprecatedd pass the config options in the constructor
-	 the only function that is actually required to start tracking sessions
-	 options:
-	 version
-	 continueSessionSeconds       (must be less than or equal to five for Android)
-	 userId
-	 gender
-	 age
-	 logLevel                    (VERBOSE, DEBUG, INFO, WARN, ERROR)
-	 enableLogging               (defaults to false)
-	 enableEventLogging          (defaults to true)
-	 enableCrashReporting        (defaults to false, iOS only)
-	 enableBackgroundSessions    (defaults to false, iOS only)
-	 reportSessionsOnClose       (defaults to true, iOS only)
-	 reportSessionsOnPause       (defaults to true, iOS only)
-	 */
-	this.init = function (appKey /* [options], successCallback, failureCallback */) {
 
-		var successCallback,
-			failureCallback,
-			options;
-
-		if (arguments.length === 4) {
-			options = arguments[1];
-			successCallback = arguments[2];
-			failureCallback = arguments[3];
-		} else if (arguments.length === 3) {
-			successCallback = arguments[1];
-			failureCallback = arguments[2];
-		} else if (arguments.length === 2) {
-			options = arguments[1];
-		}
-
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'initialize', [appKey, options]);
+	this.logAdClick = function (adType) {
+		exec(null, null, 'FlurryAnalytics', 'logAdClick', [adType]);
 	};
 
-	this.setUserId = function (userId, successCallback, failureCallback) {
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'setUserId', [
-			userId
+	this.logAdImpression = function (adType) {
+		exec(null, null, 'FlurryAnalytics', 'logAdImpression', [adType]);
+	};
+
+	this.logAdRewarded = function (adType) {
+		exec(null, null, 'FlurryAnalytics', 'logAdRewarded', [adType]);
+	};
+
+	this.logAdSkipped = function (adType) {
+		exec(null, null, 'FlurryAnalytics', 'logAdSkipped', [adType]);
+	};
+
+	this.logCreditsSpent = function (
+		levelNumber,
+		totalAmount,
+		isCurrencySoft,
+		creditType,
+		creditId,
+		creditName,
+		currencyType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logCreditsSpent', [
+			levelNumber,
+			totalAmount,
+			isCurrencySoft,
+			creditType,
+			creditId,
+			creditName,
+			currencyType
 		]);
-	};
+	}
 
-	this.setAge = function (age, successCallback, failureCallback) {
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'setAge', [
-			age
+	this.logCreditsPurchased = function (
+		levelNumber,
+		totalAmount,
+		isCurrencySoft,
+		creditType,
+		creditId,
+		creditName,
+		currencyType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logCreditsPurchased', [
+			levelNumber,
+			totalAmount,
+			isCurrencySoft,
+			creditType,
+			creditId,
+			creditName,
+			currencyType,
 		]);
-	};
-
-	this.setGender = function (gender, successCallback, failureCallback) {
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'setGender', [
-			gender
+	}
+	this.logCreditsEarned = function (
+		levelNumber,
+		totalAmount,
+		isCurrencySoft,
+		creditType,
+		creditId,
+		creditName,
+		currencyType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logCreditsEarned', [
+			levelNumber,
+			totalAmount,
+			isCurrencySoft,
+			creditType,
+			creditId,
+			creditName,
+			currencyType,
 		]);
-	};
+	}
 
-	// the params parameter is optional
-	this.logEvent = function (event /* [params], successCallback, failureCallback */) {
+	this.logAchievementUnlocked = function (achievementId) {
+		exec(null, null, 'FlurryAnalytics', 'logAchievementUnlocked', [achievementId]);
+	}
 
-		var successCallback,
-			failureCallback,
-			params;
+	this.logLevelCompleted = function (
+		levelNumber,
+		levelName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLevelCompleted', [levelNumber, levelName]);
+	}
 
-		if (arguments.length === 4) {
-			params = arguments[1];
-			successCallback = arguments[2];
-			failureCallback = arguments[3];
-		} else if (arguments.length === 3) {
-			successCallback = arguments[1];
-			failureCallback = arguments[2];
-		} else if (arguments.length === 2) {
-			params = arguments[1];
-		}
+	this.logLevelFailed = function (
+		levelNumber,
+		levelName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLevelFailed', [levelNumber, levelName]);
+	}
 
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'logEvent', [
-			event,
-			false,
-			params
+	this.logLevelUp = function (
+		levelNumber,
+		levelName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLevelUp', [levelNumber, levelName]);
+	}
+
+	this.logLevelStarted = function (
+		levelNumber,
+		levelName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLevelStarted', [levelNumber, levelName]);
+	}
+
+	this.logLevelSkip = function (
+		levelNumber,
+		levelName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLevelSkip', [levelNumber, levelName]);
+	}
+
+	this.logScorePosted = function (
+		levelNumber,
+		score,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logScorePosted', [levelNumber, score]);
+	}
+
+	this.logAppActivated = function () {
+		exec(null, null, 'FlurryAnalytics', 'logAppActivated', []);
+	}
+
+	this.logApplicationSubmitted = function () {
+		exec(null, null, 'FlurryAnalytics', 'logApplicationSubmitted', []);
+	}
+
+	this.logAddItemToCart = function (
+		itemCount,
+		price,
+		itemId,
+		itemName,
+		itemType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logAddItemToCart', [itemCount, price, itemId, itemName, itemType]);
+	}
+
+	this.logAddItemToWishList = function (
+		itemCount,
+		price,
+		itemId,
+		itemName,
+		itemType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logAddItemToWishList', [itemCount, price, itemId, itemName, itemType]);
+	}
+
+	this.logCompletedCheckout = function (
+		itemCount,
+		totalAmount,
+		currencyType,
+		transactionId,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logCompletedCheckout', [itemCount, totalAmount, currencyType, transactionId]);
+	}
+
+	this.logPaymentInfoAdded = function (
+		success,
+		paymentType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logPaymentInfoAdded', [success, paymentType]);
+	}
+
+	this.logItemViewed = function (
+		price,
+		itemId,
+		itemName,
+		itemType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logItemViewed', [price, itemId, itemName, itemType]);
+	}
+
+	this.logItemListViewed = function (
+		itemListType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logItemListViewed', [itemListType]);
+	}
+
+	this.logPurchased = function (
+		itemCount,
+		totalAmount,
+		itemId,
+		success,
+		itemName,
+		itemType,
+		currencyType,
+		transactionId,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logPurchased', [itemCount, totalAmount, itemId, success, itemName, itemType, currencyType, transactionId]);
+	}
+
+	this.logPurchaseRefunded = function (
+		price,
+		currencyType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logPurchaseRefunded', [price, currencyType]);
+	}
+
+	this.logRemoveItemFromCart = function (
+		price,
+		itemId,
+		itemName,
+		itemType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logRemoveItemFromCart', [price, itemId, itemName, itemType]);
+	}
+
+	this.logCheckoutInitiated = function (
+		itemCount,
+		totalAmount,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logCheckoutInitiated', [itemCount, totalAmount]);
+	}
+
+	this.logFundsDonated = function (
+		price,
+		currencyType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logFundsDonated', [price, currencyType]);
+	}
+
+	this.logUserScheduled = function () {
+		exec(null, null, 'FlurryAnalytics', 'logUserScheduled', []);
+	}
+
+	this.logOfferPresented = function (
+		price,
+		itemId,
+		itemName,
+		itemCategory,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logOfferPresented', [price, itemId, itemName, itemCategory]);
+	}
+
+	this.logTutorialStarted = function (
+		tutorialName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logTutorialStarted', [tutorialName]);
+	}
+
+	this.logTutorialCompleted = function (
+		tutorialName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logTutorialCompleted', [tutorialName]);
+	}
+
+	this.logTutorialStepCompleted = function (
+		stepNumber,
+		tutorialName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logTutorialStepCompleted', [stepNumber, tutorialName]);
+	}
+
+	this.logTutorialSkipped = function (
+		stepNumber,
+		tutorialName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logTutorialSkipped', [stepNumber, tutorialName]);
+	}
+
+	this.logPrivacyPromptDisplayed = function () {
+		exec(null, null, 'FlurryAnalytics', 'logPrivacyPromptDisplayed', []);
+	}
+
+	this.logPrivacyOptIn = function () {
+		exec(null, null, 'FlurryAnalytics', 'logPrivacyOptIn', []);
+	}
+
+	this.logPrivacyOptOut = function () {
+		exec(null, null, 'FlurryAnalytics', 'logPrivacyOptOut', []);
+	}
+
+	this.endTimedEvent = function (eventName) {
+		exec(null, null, 'FlurryAnalytics', 'endTimedEvent', [eventName]);
+	}
+
+	this.logContentRated = function (
+		contentId,
+		contentRating,
+		contentName,
+		contentType
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logContentRated', [contentId, contentRating, contentName, contentType]);
+	}
+
+	this.logContentViewed = function (
+		contentId,
+		contentName,
+		contentType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logContentViewed', [contentId, contentName, contentType]);
+	}
+
+	this.logContentSaved = function (
+		contentId,
+		contentName,
+		contentType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logContentSaved', [contentId, contentName, contentType]);
+	}
+
+	this.logProductCustomized = function () {
+		exec(null, null, 'FlurryAnalytics', 'logProductCustomized', []);
+	}
+
+	this.logSubscriptionStarted = function (
+		price,
+		isAnnualSubscription,
+		trialDays,
+		predictedLTV,
+		currencyType,
+		subscriptionCountry,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logSubscriptionStarted', [
+			price,
+			isAnnualSubscription,
+			trialDays,
+			predictedLTV,
+			currencyType,
+			subscriptionCountry
 		]);
-	};
+	}
 
-	// the params parameter is optional
-	this.startTimedEvent = function (event /* [params], successCallback, failureCallback */) {
+	this.logSubscriptionEnded = function (
+		isAnnualSubscription,
+		currencyType,
+		subscriptionCountry,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logSubscriptionEnded', [isAnnualSubscription, currencyType, subscriptionCountry]);
+	}
 
-		var successCallback,
-			failureCallback,
-			params;
+	this.logGroupJoined = function (
+		groupName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logGroupJoined', [groupName]);
+	}
 
-		if (arguments.length === 4) {
-			params = arguments[1];
-			successCallback = arguments[2];
-			failureCallback = arguments[3];
-		} else if (arguments.length === 3) {
-			successCallback = arguments[1];
-			failureCallback = arguments[2];
-		} else if (arguments.length === 2) {
-			params = arguments[1];
-		}
+	this.logGroupLeft = function (
+		groupName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logGroupLeft', [groupName]);
+	}
 
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'logEvent', [
-			event,
-			true,
-			params
-		]);
-	};
+	this.logLogin = function (
+		userId,
+		method,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLogin', [userId, method]);
+	}
 
-	// the params parameter is optional
-	this.endTimedEvent = function (event /* [params], successCallback, failureCallback */) {
+	this.logLogout = function (
+		userId,
+		method,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLogout', [userId, method]);
+	}
 
-		var successCallback,
-			failureCallback,
-			params;
+	this.logUserRegistered = function (
+		userId,
+		method,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logUserRegistered', [userId, method]);
+	}
 
-		if (arguments.length === 4) {
-			params = arguments[1];
-			successCallback = arguments[2];
-			failureCallback = arguments[3];
-		} else if (arguments.length === 3) {
-			successCallback = arguments[1];
-			failureCallback = arguments[2];
-		} else if (arguments.length === 2) {
-			params = arguments[1];
-		}
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'endTimedEvent', [
-			event,
-			params
-		]);
-	};
+	this.logSearchResultViewed = function (
+		query,
+		searchType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logSeachResultViewed', [query, searchType]);
+	}
 
-	this.logPageView = function (successCallback, failureCallback) {
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'logPageView', []);
-	};
+	this.logKeywordSearched = function (
+		query,
+		searchType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logKeywordSearched', [query, searchType]);
+	}
 
-	this.logError = function (code, message, successCallback, failureCallback) {
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'logError', [code, message]);
-	};
+	this.logLocationSearched = function (
+		query,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLocationSearched', [query]);
+	}
 
-	this.setLocation = function (location, message, successCallback, failureCallback) {
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'setLocation', [
-			location.latitude,
-			location.longitude,
-			location.verticalAccuracy,
-			location.horizontalAccuracy
-		]);
-	};
+	this.logInvite = function (
+		userId,
+		method,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLocationSearched', [userId, method]);
+	}
 
-	// only needed for older versions of Android
-	this.startSession = function (successCallback, failureCallback) {
+	this.logShare = function (
+		socialContentId,
+		socialContentName,
+		method,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logShare', [socialContentId, socialContentName, method]);
+	}
 
-		if (cordova.platformId !== 'android') return;
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'startSession', []);
-	};
+	this.logLike = function (
+		socialContentId,
+		socialContentName,
+		likeType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logLike', [socialContentId, socialContentName, likeType]);
+	}
 
-	// only needed for older versions of Android
-	this.endSession = function (successCallback, failureCallback) {
+	this.logComment = function (
+		socialContentId,
+		socialContentName,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logComment', [socialContentId, socialContentName]);
+	}
 
-		if (cordova.platformId !== 'android') return;
-		exec(successCallback, failureCallback, 'FlurryAnalyticsPlugin', 'endSession', []);
-	};
+	this.logMediaCaptured = function (
+		mediaId,
+		mediaName,
+		mediaType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logMediaCaptured', [mediaId, mediaName, mediaType]);
+	}
 
+	this.logMediaStarted = function (
+		mediaId,
+		mediaName,
+		mediaType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logMediaStarted', [mediaId, mediaName, mediaType]);
+	}
+
+	this.logMediaStopped = function (
+		duration,
+		mediaId,
+		mediaName,
+		mediaType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logMediaStopped', [duration, mediaId, mediaName, mediaType]);
+	}
+
+	this.logMediaPaused = function (
+		duration,
+		mediaId,
+		mediaName,
+		mediaType,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logMediaPaused', [duration, mediaId, mediaName, mediaType]);
+	}
+
+	this.logCustomEvent = function (
+		eventName,
+		eventParams,
+		eventTimed,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logCustomEvent', [eventName, eventParams, eventTimed]);
+	}
+
+	this.setUserId = function (userId) {
+		exec(null, null, 'FlurryAnalytics', 'setUserId', [userId]);
+	}
+
+	this.setAge = function (userAge) {
+		exec(null, null, 'FlurryAnalytics', 'setAge', [userAge]);
+	}
+
+	this.setGender = function (userGender) {
+		exec(null, null, 'FlurryAnalytics', 'setGender', [userGender]);
+	}
+
+	this.logError = function (
+		errorId,
+		errorMessage,
+		error,
+	) {
+		exec(null, null, 'FlurryAnalytics', 'logError', [errorId, errorMessage, error]);
+	}
 }
 
-
+var FlurryAnalytics = new FlurryAnalytics();
 module.exports = FlurryAnalytics;
