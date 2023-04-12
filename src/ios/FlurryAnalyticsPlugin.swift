@@ -1,8 +1,8 @@
 import Foundation
 import Flurry_iOS_SDK
 
-@objc(FlurryAnalyticsPlugin)
-class FlurryAnalyticsPlugin : CDVPlugin {
+@objc(FlurryAnalytics)
+class FlurryAnalytics : CDVPlugin {
 
     // Initialize: https://developer.yahoo.com/flurry/docs/integrateflurry/ios/#swift
     @objc(initialize:) func initialize(command : CDVInvokedUrlCommand) {
