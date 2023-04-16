@@ -1,6 +1,6 @@
 {
 	"name": "crowdhub-cordova-plugin-flurryanalytics",
-	"version": "2.0.0",
+	"version": "0.0.1",
 	"description": "Adds support for Flurry Analytics to Cordova apps, the successor to https://github.com/blakgeek/cordova-plugin-flurryanalytics",
 	"repository": {
 		"type": "git",
