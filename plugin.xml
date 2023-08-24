@@ -18,8 +18,11 @@
 		</config-file>
 		<source-file src="src/ios/FlurryAnalyticsPlugin.swift"/>
 		<podspec>
+			<config>
+				<source url="https://github.com/CocoaPods/Specs.git"/>
+			</config>
 			<pods use-frameworks="true">
-				<pod name="Flurry-iOS-SDK/FlurrySDK" modular_headers="true" />
+				<pod name="Flurry-iOS-SDK/FlurrySDK" modular_headers="true" spec="12.3.1" />
 			</pods>
 		</podspec>
 		<dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
