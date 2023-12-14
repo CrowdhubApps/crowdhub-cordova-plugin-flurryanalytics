@@ -112,8 +112,8 @@ class FlurryAnalytics : CDVPlugin {
         let param = FlurryParamBuilder()
             .set(stringVal: contentId, param: FlurryParamBuilder.contentId())
         // recommended
-        if let contentName = command.arguments[2] as? String {param.set(stringVal: contentName, param: FlurryParamBuilder.contentName())}
-        if let contentType = command.arguments[3] as? String {param.set(stringVal: contentType, param: FlurryParamBuilder.contentType())}
+        if let contentName = command.arguments[1] as? String {param.set(stringVal: contentName, param: FlurryParamBuilder.contentName())}
+        if let contentType = command.arguments[2] as? String {param.set(stringVal: contentType, param: FlurryParamBuilder.contentType())}
 
         Flurry.log(standardEvent: FlurryEvent.contentViewed, param: param)
 
@@ -140,8 +140,8 @@ class FlurryAnalytics : CDVPlugin {
         let param = FlurryParamBuilder()
             .set(stringVal: contentId, param: FlurryParamBuilder.contentId())
         // recommended
-        if let contentName = command.arguments[2] as? String {param.set(stringVal: contentName, param: FlurryParamBuilder.contentName())}
-        if let contentType = command.arguments[3] as? String {param.set(stringVal: contentType, param: FlurryParamBuilder.contentType())}
+        if let contentName = command.arguments[1] as? String {param.set(stringVal: contentName, param: FlurryParamBuilder.contentName())}
+        if let contentType = command.arguments[2] as? String {param.set(stringVal: contentType, param: FlurryParamBuilder.contentType())}
 
         Flurry.log(standardEvent: FlurryEvent.contentSaved, param: param)
 
